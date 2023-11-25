@@ -4,10 +4,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { renderTreeData } from '@/constants/AppConstant';
 
-function RuleSet(ruleSet: any) {
+export default function RuleSetTree() {
 
   const renderTree = (nodes: RenderTree) => (
-    <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name}>
+    <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name} className={nodes.feature === true ? 'allblack' : 'allgrey'}>
       {Array.isArray(nodes.children)
         ? nodes.children.map((node) => renderTree(node))
         : null}
@@ -25,11 +25,5 @@ function RuleSet(ruleSet: any) {
         {renderTree(renderTreeData)}
       </TreeView>
     </div>
-  );
-}
-
-export default function RuleSetTree() {
-  return (
-    <RuleSet />
   );
 }
