@@ -7,15 +7,19 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import TextField from '@mui/material/TextField';
 
-export default function RuleSetEditForm(value: any) {
+export default function RuleSetEditForm(ruleSet: RenderTree, parentRuleStatus?: boolean) {
+  const ruleType = ruleSet.children && ruleSet.children.length >= 0 ? 'This is a standlone rule' : 'This is a rule set';
+  const ruleAvaliableActions = ruleSet.children && ruleSet.children.length >= 0 ? 'You can only turn it on / off': 'You can use boolean flag or primitive data typ';
+  const ruleImpact = ruleSet.children && ruleSet.children.length >= 0 ? 'Changing the rule has impact on all feature under it': 'Changing this rule will impact the feature it binds to';
+
   return (
     <div className='d-flex flex-column'>
       <h6>Edit Rule</h6>
-      <ol>
-        <li>What type of rule is this ?</li>
-        <li>You what can do with it ?</li>
-        <li>What will be the impact for other rules ?</li>
-      </ol>
+      <ul>
+        <li>{ruleType}</li>
+        <li>{ruleAvaliableActions}</li>
+        <li>{ruleImpact}</li>
+      </ul>
       <FormGroup>
         <div>
           <RadioGroup
