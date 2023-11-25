@@ -8,11 +8,15 @@ import RadioGroup from '@mui/material/RadioGroup';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 
-export default function RuleSetEditForm(ruleSet: RenderTree, parentRuleStatus?: boolean) {
-  const [toggleDisabled, setToggleDisabled] = useState(typeof (ruleSet.feature) !== 'boolean');
-  const ruleType = ruleSet.children && ruleSet.children.length >= 0 ? 'This is a standlone rule' : 'This is a rule set';
-  const ruleAvaliableActions = ruleSet.children && ruleSet.children.length >= 0 ? 'You can only turn it on / off' : 'You can use boolean flag or primitive data typ';
-  const ruleImpact = ruleSet.children && ruleSet.children.length >= 0 ? 'Changing the rule has impact on all feature under it' : 'Changing this rule will impact the feature it binds to';
+interface ruleSetEditFormProps {
+  ruleSet: RenderTree
+}
+
+export default function RuleSetEditForm(props: ruleSetEditFormProps) {
+  const [toggleDisabled, setToggleDisabled] = useState(typeof (props.ruleSet.feature) !== 'boolean');
+  const ruleType = props.ruleSet.children && props.ruleSet.children.length > 0 ? 'This is a rule set' : 'This is a standlone rule'; 
+  const ruleAvaliableActions = props.ruleSet.children && props.ruleSet.children.length > 0 ? 'You can use boolean flag or primitive data typ' : 'You can only turn it on / off';
+  const ruleImpact = props.ruleSet.children && props.ruleSet.children.length > 0 ? 'Changing this rule will impact the feature it binds to' : 'Changing the rule has impact on all feature under it';
 
   const onFlagTypeChange = (flag: String) => {
     setToggleDisabled(flag !== 'switch');
@@ -28,7 +32,7 @@ export default function RuleSetEditForm(ruleSet: RenderTree, parentRuleStatus?: 
       </ul>
       <FormGroup>
         <div>
-          <RadioGroup name="radio-buttons-group" defaultValue={typeof (ruleSet.feature) === 'boolean' ? 'switch' : 'value'} onChange={(e) => onFlagTypeChange(e.target.value)}>
+          <RadioGroup name="radio-buttons-group" defaultValue={typeof (props.ruleSet.feature) === 'boolean' ? 'switch' : 'value'} onChange={(e) => onFlagTypeChange(e.target.value)}>
             <FormControlLabel value="switch" control={<Radio />} label="Use a on / off switch" />
             <FormControlLabel label="ON" disabled={toggleDisabled} control={<Switch defaultChecked />} />
             <FormControlLabel value="value" control={<Radio />} label="Use a string or number" />

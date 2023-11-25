@@ -6,7 +6,7 @@ export const renderTreeData: RenderTree = {
         {
             id: '0',
             name: 'onboard',
-            feature: true,
+            feature: false,
             children: [
                 {
                     id: '10',
@@ -16,12 +16,12 @@ export const renderTreeData: RenderTree = {
                         {
                             id: '12',
                             name: 'faceId',
-                            feature: true
+                            feature: 'faceId'
                         },
                         {
                             id: '13',
                             name: 'touchId',
-                            feature: true
+                            feature: 'touchId'
                         }
                     ]
                 },
@@ -40,12 +40,12 @@ export const renderTreeData: RenderTree = {
                 {
                     id: '2',
                     name: 'installment',
-                    feature: true
+                    feature: 2
                 },
                 {
                     id: '3',
                     name: 'bnpl',
-                    feature: true
+                    feature: 3
                 }
             ],
         },

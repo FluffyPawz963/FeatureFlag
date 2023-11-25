@@ -4,16 +4,11 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { renderTreeData } from '@/constants/AppConstant';
 
-export default function RuleSetTree() {
+interface ruleSetTreeProps {
+  selectionCallback: any
+}
 
-  const renderTree = (nodes: RenderTree) => (
-    <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name} className={nodes.feature === true ? 'allblack' : 'allgrey'}>
-      {Array.isArray(nodes.children)
-        ? nodes.children.map((node) => renderTree(node))
-        : null}
-    </TreeItem>
-  );
-
+export default function RuleSetTree(props: ruleSetTreeProps) {
   return (
     <div>
       <TreeView
@@ -22,8 +17,17 @@ export default function RuleSetTree() {
         defaultExpanded={['root']}
         defaultExpandIcon={<ChevronRightIcon />}
       >
-        {renderTree(renderTreeData)}
+        {renderTree(renderTreeData, props.selectionCallback)}
       </TreeView>
     </div>
   );
 }
+
+const renderTree = (nodes: RenderTree, callback: any) => (
+  <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name} 
+  className={nodes.feature === true ? 'allblack' : 'allgrey'} onClick={() => callback(nodes)}>
+    {Array.isArray(nodes.children)
+      ? nodes.children.map((node) => renderTree(node, callback))
+      : null}
+  </TreeItem>
+);
