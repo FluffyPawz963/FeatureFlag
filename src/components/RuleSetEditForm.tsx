@@ -24,7 +24,7 @@ export default function RuleSetEditForm(props: ruleSetEditFormProps) {
 
   return (
     <div className='d-flex flex-column'>
-      <h6>Edit Rule</h6>
+      <h6>Editing Rule - {props.ruleSet.name}</h6>
       <ul>
         <li>{ruleType}</li>
         <li>{ruleAvaliableActions}</li>
