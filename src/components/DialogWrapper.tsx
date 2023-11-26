@@ -15,7 +15,7 @@ interface DialogWrapperProps {
     open: boolean
 }
 
-export default function CommonDialog(props: DialogWrapperProps) {
+export default function DialogWrapper(props: DialogWrapperProps) {
   return (
     <>
       <Dialog
@@ -25,12 +25,11 @@ export default function CommonDialog(props: DialogWrapperProps) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          {props.title}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
+            {props.text}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
